@@ -1,0 +1,1709 @@
+{
+ "NEAR": {
+  "symbol": "NEAR",
+  "hours": 24,
+  "summary": {
+   "calls": 9,
+   "kols": 9,
+   "long": 7,
+   "short": 2
+  },
+  "calls": [
+   {
+    "kol": "watashi_wu",
+    "followers": 50693,
+    "mihenk_score": 5.8,
+    "direction": "short",
+    "posted_at": "2026-11-12T05:32:00Z",
+    "post_url": "https://x.com/watashi_wu/status/2120751603527668148",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "KazTheShadow",
+    "followers": 17432,
+    "mihenk_score": 5.2,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:24:00Z",
+    "post_url": "https://x.com/KazTheShadow/status/2120598584441671967",
+    "price_move_pct": {
+     "5m": 0.4,
+     "1h": -0.3
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoMichNL",
+    "followers": 822607,
+    "mihenk_score": 7.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T18:47:00Z",
+    "post_url": "https://x.com/CryptoMichNL/status/2120589122985451719",
+    "price_move_pct": {
+     "5m": -0.8
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Mrbullemmy",
+    "followers": 11726,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T17:38:00Z",
+    "post_url": "https://x.com/Mrbullemmy/status/2120571787574464938",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -0.8
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "JohnNakamoto_",
+    "followers": 36770,
+    "mihenk_score": 6.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:13:00Z",
+    "post_url": "https://x.com/JohnNakamoto_/status/2120550372955595013",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptoboss1984",
+    "followers": 165032,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:02:00Z",
+    "post_url": "https://x.com/CryptoBoss1984/status/2120547798949273760",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -1,
+     "4h": -1.9
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "TheEuroSniper",
+    "followers": 85916,
+    "mihenk_score": 6.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T15:07:00Z",
+    "post_url": "https://x.com/TheEuroSniper/status/2120533913982693719",
+    "price_move_pct": {
+     "5m": 0.4,
+     "1h": 0.9
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "SatoshiFlipper",
+    "followers": 238543,
+    "mihenk_score": 6.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T13:45:00Z",
+    "post_url": "https://x.com/SatoshiFlipper/status/2120513313058787710",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -1.8
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "AltcoinSherpa",
+    "followers": 263654,
+    "mihenk_score": 6.6,
+    "direction": "short",
+    "posted_at": "2026-11-11T13:39:00Z",
+    "post_url": "https://x.com/AltcoinSherpa/status/2120511673677279515",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": -1.8
+    },
+    "price_source": "Binance"
+   }
+  ],
+  "price_move_note": "Price change after the post at 5m / 1h / 4h / 24h; a window appears once it has been measured.",
+  "note": "Independent measurement by Mihenk AI (mihenkai.com). Not investment advice.",
+  "snapshot": "Mihenk AI dataset, last 24h as of 2026-11-12T07:25Z"
+ },
+ "SOL": {
+  "symbol": "SOL",
+  "hours": 24,
+  "summary": {
+   "calls": 33,
+   "kols": 32,
+   "long": 30,
+   "short": 3
+  },
+  "calls": [
+   {
+    "kol": "fluffycrypt",
+    "followers": 155863,
+    "mihenk_score": 5.4,
+    "direction": "long",
+    "posted_at": "2026-11-12T06:14:00Z",
+    "post_url": "https://x.com/fluffycrypt/status/2120762074112418208",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "thisisksa",
+    "followers": 35403,
+    "mihenk_score": 5.1,
+    "direction": "long",
+    "posted_at": "2026-11-12T04:45:00Z",
+    "post_url": "https://x.com/thisisksa/status/2120739614784884896",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.3
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "aangel",
+    "followers": 35428,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-12T00:40:00Z",
+    "post_url": "https://x.com/aangel/status/2120678113298235455",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "mrbrown_nft",
+    "followers": 169321,
+    "mihenk_score": 5.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T23:27:00Z",
+    "post_url": "https://x.com/mrbrown_nft/status/2120659692124827660",
+    "price_move_pct": {
+     "5m": 0.4,
+     "1h": 0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Demaux",
+    "followers": 50822,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:50:00Z",
+    "post_url": "https://x.com/Demaux/status/2120635402084331817",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": -1.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "BlackcatTrader7",
+    "followers": 17243,
+    "mihenk_score": 5.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:07:00Z",
+    "post_url": "https://x.com/BlackcatTrader7/status/2120624569992220707",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.3
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "misterrcrypto",
+    "followers": 135145,
+    "mihenk_score": 7.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:05:00Z",
+    "post_url": "https://x.com/misterrcrypto/status/2120623852296257559",
+    "price_move_pct": {
+     "5m": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "degengambleh",
+    "followers": 36839,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T20:50:00Z",
+    "post_url": "https://x.com/degengambleh/status/2120620288484561392",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "fergalpha",
+    "followers": 170857,
+    "mihenk_score": 7.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:32:00Z",
+    "post_url": "https://x.com/fergalpha/status/2120600579038908481",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "vsented",
+    "followers": 15172,
+    "mihenk_score": 5.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:28:00Z",
+    "post_url": "https://x.com/vsented/status/2120599659798532295",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "TedPillows",
+    "followers": 323276,
+    "mihenk_score": 8.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T18:08:00Z",
+    "post_url": "https://x.com/TedPillows/status/2120579308414435447",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Borg_Cryptos",
+    "followers": 142332,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T17:51:00Z",
+    "post_url": "https://x.com/Borg_Cryptos/status/2120575264535007288",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": -0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "SatoshiFlipper",
+    "followers": 238543,
+    "mihenk_score": 6.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:36:00Z",
+    "post_url": "https://x.com/SatoshiFlipper/status/2120556195400577046",
+    "price_move_pct": {
+     "5m": -0.3,
+     "1h": 0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "shadyybtc",
+    "followers": 39492,
+    "mihenk_score": 5.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:28:00Z",
+    "post_url": "https://x.com/shadyybtc/status/2120554273306296465",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": 0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoLegend_ET",
+    "followers": 13403,
+    "mihenk_score": 6.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:05:00Z",
+    "post_url": "https://x.com/CryptoLegend_ET/status/2120548367172349952",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.6,
+     "4h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoCurb",
+    "followers": 87480,
+    "mihenk_score": 6.2,
+    "direction": "long",
+    "posted_at": "2026-11-11T15:23:00Z",
+    "post_url": "https://x.com/CryptoCurb/status/2120537918653837402",
+    "price_move_pct": {
+     "5m": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Jia_Lilly01",
+    "followers": 63522,
+    "mihenk_score": 6.3,
+    "direction": "short",
+    "posted_at": "2026-11-11T14:44:00Z",
+    "post_url": "https://x.com/Jia_Lilly01/status/2120528145489264857",
+    "price_move_pct": {
+     "5m": -0.3,
+     "1h": 0.9
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "abrahamgambler",
+    "followers": 29158,
+    "mihenk_score": 6.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T14:06:00Z",
+    "post_url": "https://x.com/abrahamgambler/status/2120518627895951671",
+    "price_move_pct": {
+     "5m": -0.6,
+     "1h": 0.9
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "hanqing1120",
+    "followers": 19447,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T13:39:00Z",
+    "post_url": "https://x.com/hanqing1120/status/2120511834709225644",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "mythdyor",
+    "followers": 101447,
+    "mihenk_score": 6.4,
+    "direction": "long",
+    "posted_at": "2026-11-11T13:39:00Z",
+    "post_url": "https://x.com/mythdyor/status/2120511854006915565",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "MortyWeb3",
+    "followers": 132632,
+    "mihenk_score": 5.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T13:25:00Z",
+    "post_url": "https://x.com/MortyWeb3/status/2120508231886029170",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "nobi100x",
+    "followers": 42185,
+    "mihenk_score": 6.4,
+    "direction": "long",
+    "posted_at": "2026-11-11T13:11:00Z",
+    "post_url": "https://x.com/nobi100x/status/2120504809669423411",
+    "price_move_pct": {
+     "5m": 0.4,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "arthurcoins",
+    "followers": 83599,
+    "mihenk_score": 6.4,
+    "direction": "long",
+    "posted_at": "2026-11-11T12:24:00Z",
+    "post_url": "https://x.com/arthurcoins/status/2120492801775607812",
+    "price_move_pct": {
+     "5m": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoMillionYT",
+    "followers": 68088,
+    "mihenk_score": 5.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T11:42:00Z",
+    "post_url": "https://x.com/CryptoMillionYT/status/2120482206003192058",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "kongbtc",
+    "followers": 116060,
+    "mihenk_score": 7,
+    "direction": "short",
+    "posted_at": "2026-11-11T11:00:00Z",
+    "post_url": "https://x.com/KongBTC/status/2120471611631616362",
+    "price_move_pct": {
+     "5m": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Demaux",
+    "followers": 50822,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T11:00:00Z",
+    "post_url": "https://x.com/Demaux/status/2120471616308003192",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "TATrader_Alan",
+    "followers": 76593,
+    "mihenk_score": 6.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T10:34:00Z",
+    "post_url": "https://x.com/TATrader_Alan/status/2120465062309904825",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "DaanCrypto",
+    "followers": 414475,
+    "mihenk_score": 7.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T10:27:00Z",
+    "post_url": "https://x.com/DaanCrypto/status/2120463466762801281",
+    "price_move_pct": {
+     "5m": 0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "supremo_cps",
+    "followers": 73283,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T10:00:00Z",
+    "post_url": "https://x.com/supremo_cps/status/2120456501810565137",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "astro_degens",
+    "followers": 28874,
+    "mihenk_score": 5.7,
+    "direction": "long",
+    "posted_at": "2026-11-11T09:04:00Z",
+    "post_url": "https://x.com/astro_degens/status/2120442420701933695",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptosanthoshK",
+    "followers": 128717,
+    "mihenk_score": 6.7,
+    "direction": "long",
+    "posted_at": "2026-11-11T08:13:00Z",
+    "post_url": "https://x.com/cryptosanthoshK/status/2120429588417220762",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.7
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "shahh",
+    "followers": 404157,
+    "mihenk_score": 6.6,
+    "direction": "short",
+    "posted_at": "2026-11-11T08:00:00Z",
+    "post_url": "https://x.com/shahh/status/2120426309671403993",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.7
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "OguzCoskunlu",
+    "followers": 12740,
+    "mihenk_score": 5.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T07:45:00Z",
+    "post_url": "https://x.com/OguzCoskunlu/status/2120422651177185553",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.5
+    },
+    "price_source": "Binance"
+   }
+  ],
+  "price_move_note": "Price change after the post at 5m / 1h / 4h / 24h; a window appears once it has been measured.",
+  "note": "Independent measurement by Mihenk AI (mihenkai.com). Not investment advice.",
+  "snapshot": "Mihenk AI dataset, last 24h as of 2026-11-12T07:25Z"
+ },
+ "BTC": {
+  "symbol": "BTC",
+  "hours": 24,
+  "summary": {
+   "calls": 50,
+   "kols": 49,
+   "long": 38,
+   "short": 12
+  },
+  "calls": [
+   {
+    "kol": "david_eng_mba",
+    "followers": 26377,
+    "mihenk_score": 7.2,
+    "direction": "long",
+    "posted_at": "2026-11-12T06:23:00Z",
+    "post_url": "https://x.com/david_eng_mba/status/2120764378714984545",
+    "price_move_pct": {
+     "5m": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "astro_degens",
+    "followers": 28874,
+    "mihenk_score": 5.7,
+    "direction": "long",
+    "posted_at": "2026-11-12T06:09:00Z",
+    "post_url": "https://x.com/astro_degens/status/2120760854094250305",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "smile_danjer",
+    "followers": 21766,
+    "mihenk_score": 5.5,
+    "direction": "short",
+    "posted_at": "2026-11-12T05:09:00Z",
+    "post_url": "https://x.com/smile_danjer/status/2120745712812216782",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Sa1ted___Fish",
+    "followers": 22170,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-12T04:43:00Z",
+    "post_url": "https://x.com/Sa1ted___Fish/status/2120739266456387968",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "huangdaobtc",
+    "followers": 52787,
+    "mihenk_score": 6.4,
+    "direction": "short",
+    "posted_at": "2026-11-12T04:09:00Z",
+    "post_url": "https://x.com/huangdaobtc/status/2120730683555627364",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "_0xBenjamin",
+    "followers": 38021,
+    "mihenk_score": 6.2,
+    "direction": "short",
+    "posted_at": "2026-11-12T03:35:00Z",
+    "post_url": "https://x.com/_0xBenjamin/status/2120721999022661871",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "0xyi666",
+    "followers": 14806,
+    "mihenk_score": 6.9,
+    "direction": "long",
+    "posted_at": "2026-11-12T02:56:00Z",
+    "post_url": "https://x.com/0xYi666/status/2120712242081767634",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "yff5188",
+    "followers": 20060,
+    "mihenk_score": 6.4,
+    "direction": "long",
+    "posted_at": "2026-11-12T02:51:00Z",
+    "post_url": "https://x.com/yff5188/status/2120711032352215245",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "tradegym",
+    "followers": 15670,
+    "mihenk_score": 6.1,
+    "direction": "long",
+    "posted_at": "2026-11-12T02:50:00Z",
+    "post_url": "https://x.com/tradegym/status/2120710881743086005",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "zfcbtc",
+    "followers": 30702,
+    "mihenk_score": 5.6,
+    "direction": "long",
+    "posted_at": "2026-11-12T02:17:00Z",
+    "post_url": "https://x.com/zfcbtc/status/2120702591193756021",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "AYBTC6",
+    "followers": 64445,
+    "mihenk_score": 6.6,
+    "direction": "short",
+    "posted_at": "2026-11-12T02:11:00Z",
+    "post_url": "https://x.com/AYBTC6/status/2120700914902458791",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Xiaohe085",
+    "followers": 6326,
+    "mihenk_score": 5.5,
+    "direction": "short",
+    "posted_at": "2026-11-12T02:10:00Z",
+    "post_url": "https://x.com/Xiaohe085/status/2120700715714974110",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "market_beggar",
+    "followers": 21918,
+    "mihenk_score": 7,
+    "direction": "long",
+    "posted_at": "2026-11-12T02:02:00Z",
+    "post_url": "https://x.com/market_beggar/status/2120698844447183160",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "KuzuProducerZ",
+    "followers": 19597,
+    "mihenk_score": 5.2,
+    "direction": "long",
+    "posted_at": "2026-11-12T01:01:00Z",
+    "post_url": "https://x.com/KuzuProducerZ/status/2120683461312958913",
+    "price_move_pct": {
+     "5m": -0.3,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "jany268",
+    "followers": 18597,
+    "mihenk_score": 5.6,
+    "direction": "long",
+    "posted_at": "2026-11-12T01:00:00Z",
+    "post_url": "https://x.com/jany268/status/2120682997561143353",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "BigCheds",
+    "followers": 375462,
+    "mihenk_score": 6.5,
+    "direction": "long",
+    "posted_at": "2026-11-12T00:57:00Z",
+    "post_url": "https://x.com/BigCheds/status/2120682262928990616",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": -0.5
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "SuperBitcoinBro",
+    "followers": 31507,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-12T00:34:00Z",
+    "post_url": "https://x.com/SuperBitcoinBro/status/2120676581022806182",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.5,
+     "4h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Learnernoearner",
+    "followers": 129187,
+    "mihenk_score": 6.7,
+    "direction": "long",
+    "posted_at": "2026-11-12T00:28:00Z",
+    "post_url": "https://x.com/Learnernoearner/status/2120675148499918849",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": -0.5,
+     "4h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "trader1sz",
+    "followers": 693847,
+    "mihenk_score": 6.4,
+    "direction": "short",
+    "posted_at": "2026-11-12T00:17:00Z",
+    "post_url": "https://x.com/trader1sz/status/2120672300873998381",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.5
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CredibleCrypto",
+    "followers": 481551,
+    "mihenk_score": 7.8,
+    "direction": "long",
+    "posted_at": "2026-11-12T00:01:00Z",
+    "post_url": "https://x.com/CredibleCrypto/status/2120668240565375320",
+    "price_move_pct": {
+     "5m": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptojack",
+    "followers": 490359,
+    "mihenk_score": 6,
+    "direction": "short",
+    "posted_at": "2026-11-12T00:00:00Z",
+    "post_url": "https://x.com/cryptojack/status/2120667987459858485",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.5
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "0xchainMind",
+    "followers": 173268,
+    "mihenk_score": 6.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T23:56:00Z",
+    "post_url": "https://x.com/0xChainMind/status/2120667026129600798",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Raizelxbt",
+    "followers": 32185,
+    "mihenk_score": 6.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T23:45:00Z",
+    "post_url": "https://x.com/Raizelxbt/status/2120664246723960964",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptosymbiiote",
+    "followers": 119235,
+    "mihenk_score": 6.7,
+    "direction": "long",
+    "posted_at": "2026-11-11T23:42:00Z",
+    "post_url": "https://x.com/cryptosymbiiote/status/2120663579544211810",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "LP_NXT",
+    "followers": 18933,
+    "mihenk_score": 7.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T23:09:00Z",
+    "post_url": "https://x.com/LP_NXT/status/2120655199945584989",
+    "price_move_pct": {
+     "5m": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "ambitcoin23",
+    "followers": 7586,
+    "mihenk_score": 5.8,
+    "direction": "short",
+    "posted_at": "2026-11-11T22:34:00Z",
+    "post_url": "https://x.com/ambitcoin23/status/2120646475155673391",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptosanthoshK",
+    "followers": 128717,
+    "mihenk_score": 6.7,
+    "direction": "short",
+    "posted_at": "2026-11-11T22:17:00Z",
+    "post_url": "https://x.com/cryptosanthoshK/status/2120642109741142491",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptorover",
+    "followers": 1623518,
+    "mihenk_score": 8.7,
+    "direction": "short",
+    "posted_at": "2026-11-11T22:02:00Z",
+    "post_url": "https://x.com/cryptorover/status/2120638226583187843",
+    "price_move_pct": {
+     "5m": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "AshCrypto",
+    "followers": 2153335,
+    "mihenk_score": 8.9,
+    "direction": "short",
+    "posted_at": "2026-11-11T22:01:00Z",
+    "post_url": "https://x.com/AshCrypto/status/2120638112758215069",
+    "price_move_pct": {
+     "5m": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "theionicXBT",
+    "followers": 202668,
+    "mihenk_score": 6.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:47:00Z",
+    "post_url": "https://x.com/theionicXBT/status/2120634422923829445",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": -0.6
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "rektcapital",
+    "followers": 562420,
+    "mihenk_score": 7.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:29:00Z",
+    "post_url": "https://x.com/rektcapital/status/2120629932699124052",
+    "price_move_pct": {
+     "5m": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "eliz883",
+    "followers": 607580,
+    "mihenk_score": 7.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:20:00Z",
+    "post_url": "https://x.com/eliz883/status/2120627761970647219",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "RonSwanonson",
+    "followers": 11535,
+    "mihenk_score": 5.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:19:00Z",
+    "post_url": "https://x.com/RonSwanonson/status/2120627445795844220",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "DeFiMidas",
+    "followers": 108642,
+    "mihenk_score": 5.7,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:15:00Z",
+    "post_url": "https://x.com/DeFiMidas/status/2120626431487332775",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "BlackcatTrader7",
+    "followers": 17243,
+    "mihenk_score": 5.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:07:00Z",
+    "post_url": "https://x.com/BlackcatTrader7/status/2120624569992220707",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "misterrcrypto",
+    "followers": 135145,
+    "mihenk_score": 7.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:05:00Z",
+    "post_url": "https://x.com/misterrcrypto/status/2120623852296257559",
+    "price_move_pct": {
+     "5m": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "MerlijnTrader",
+    "followers": 424546,
+    "mihenk_score": 6.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:00:00Z",
+    "post_url": "https://x.com/MerlijnTrader/status/2120622598975287320",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "XForceGlobal",
+    "followers": 38709,
+    "mihenk_score": 6.7,
+    "direction": "long",
+    "posted_at": "2026-11-11T20:52:00Z",
+    "post_url": "https://x.com/XForceGlobal/status/2120620671470645316",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoArchieYT",
+    "followers": 13337,
+    "mihenk_score": 5.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T20:51:00Z",
+    "post_url": "https://x.com/CryptoArchieYT/status/2120620477412773914",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Okpara081",
+    "followers": 41145,
+    "mihenk_score": 5.5,
+    "direction": "short",
+    "posted_at": "2026-11-11T20:19:00Z",
+    "post_url": "https://x.com/Okpara081/status/2120612406653313214",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "SuperBitcoinBro",
+    "followers": 31507,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T20:08:00Z",
+    "post_url": "https://x.com/SuperBitcoinBro/status/2120609570217402517",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Yodaskk",
+    "followers": 33794,
+    "mihenk_score": 5.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:54:00Z",
+    "post_url": "https://x.com/Yodaskk/status/2120606199208899009",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "crypto_facts_",
+    "followers": 76133,
+    "mihenk_score": 7.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:38:00Z",
+    "post_url": "https://x.com/crypto_facts_/status/2120601961187688719",
+    "price_move_pct": {
+     "5m": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "fergalpha",
+    "followers": 170857,
+    "mihenk_score": 7.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:32:00Z",
+    "post_url": "https://x.com/fergalpha/status/2120600579038908481",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "AstroCryptoGuru",
+    "followers": 55789,
+    "mihenk_score": 5.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T18:49:00Z",
+    "post_url": "https://x.com/AstroCryptoGuru/status/2120589796011823394",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptolaanie",
+    "followers": 27265,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T18:35:00Z",
+    "post_url": "https://x.com/cryptolaanie/status/2120586105682821395",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "ShibSpain",
+    "followers": 31321,
+    "mihenk_score": 5.2,
+    "direction": "long",
+    "posted_at": "2026-11-11T18:23:00Z",
+    "post_url": "https://x.com/ShibSpain/status/2120583319985512587",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "ThinkingBitmex",
+    "followers": 92982,
+    "mihenk_score": 6.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T18:19:00Z",
+    "post_url": "https://x.com/ThinkingBitmex/status/2120582203683827796",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "DieguitoCharts",
+    "followers": 30438,
+    "mihenk_score": 5.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T18:10:00Z",
+    "post_url": "https://x.com/DieguitoCharts/status/2120579908590305644",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Borg_Cryptos",
+    "followers": 142332,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T17:51:00Z",
+    "post_url": "https://x.com/Borg_Cryptos/status/2120575264535007288",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   }
+  ],
+  "price_move_note": "Price change after the post at 5m / 1h / 4h / 24h; a window appears once it has been measured.",
+  "note": "Independent measurement by Mihenk AI (mihenkai.com). Not investment advice.",
+  "snapshot": "Mihenk AI dataset, last 24h as of 2026-11-12T07:25Z"
+ },
+ "ETH": {
+  "symbol": "ETH",
+  "hours": 24,
+  "summary": {
+   "calls": 36,
+   "kols": 35,
+   "long": 31,
+   "short": 5
+  },
+  "calls": [
+   {
+    "kol": "bizbrainzuni",
+    "followers": 42001,
+    "mihenk_score": 5.1,
+    "direction": "long",
+    "posted_at": "2026-11-12T04:48:00Z",
+    "post_url": "https://x.com/bizbrainzuni/status/2120740410826055956",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "AYBTC6",
+    "followers": 64445,
+    "mihenk_score": 6.6,
+    "direction": "short",
+    "posted_at": "2026-11-12T02:11:00Z",
+    "post_url": "https://x.com/AYBTC6/status/2120700914902458791",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptosymbiiote",
+    "followers": 119235,
+    "mihenk_score": 6.7,
+    "direction": "long",
+    "posted_at": "2026-11-12T01:14:00Z",
+    "post_url": "https://x.com/cryptosymbiiote/status/2120686709117706352",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.3
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Raizelxbt",
+    "followers": 32185,
+    "mihenk_score": 6.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T23:00:00Z",
+    "post_url": "https://x.com/Raizelxbt/status/2120652921159496070",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.3
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Trader_XO",
+    "followers": 552636,
+    "mihenk_score": 6.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T22:27:00Z",
+    "post_url": "https://x.com/Trader_XO/status/2120644603468537904",
+    "price_move_pct": {
+     "5m": -0.5,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "eliz883",
+    "followers": 607580,
+    "mihenk_score": 7.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:25:00Z",
+    "post_url": "https://x.com/eliz883/status/2120628997885227393",
+    "price_move_pct": {
+     "5m": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "BlackcatTrader7",
+    "followers": 17243,
+    "mihenk_score": 5.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:07:00Z",
+    "post_url": "https://x.com/BlackcatTrader7/status/2120624569992220707",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "misterrcrypto",
+    "followers": 135145,
+    "mihenk_score": 7.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T21:05:00Z",
+    "post_url": "https://x.com/misterrcrypto/status/2120623852296257559",
+    "price_move_pct": {
+     "5m": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "fergalpha",
+    "followers": 170857,
+    "mihenk_score": 7.3,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:32:00Z",
+    "post_url": "https://x.com/fergalpha/status/2120600579038908481",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "barbosacoin",
+    "followers": 58958,
+    "mihenk_score": 7.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T19:08:00Z",
+    "post_url": "https://x.com/barbosacoin/status/2120594628013613543",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Borg_Cryptos",
+    "followers": 142332,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T17:51:00Z",
+    "post_url": "https://x.com/Borg_Cryptos/status/2120575264535007288",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "IncomeSharks",
+    "followers": 738175,
+    "mihenk_score": 7.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T17:31:00Z",
+    "post_url": "https://x.com/IncomeSharks/status/2120570235053040030",
+    "price_move_pct": {
+     "5m": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "cryptologyKito",
+    "followers": 20881,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T17:21:00Z",
+    "post_url": "https://x.com/cryptologyKito/status/2120567540967415864",
+    "price_move_pct": {
+     "5m": 0.3,
+     "1h": -0.4
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "BTCZAYRO",
+    "followers": 71301,
+    "mihenk_score": 6.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:59:00Z",
+    "post_url": "https://x.com/BTCZAYRO/status/2120562058337071526",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.7
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "rektcapital",
+    "followers": 562420,
+    "mihenk_score": 7.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:51:00Z",
+    "post_url": "https://x.com/rektcapital/status/2120560025521602734",
+    "price_move_pct": {
+     "5m": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "TedPillows",
+    "followers": 323276,
+    "mihenk_score": 8.1,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:41:00Z",
+    "post_url": "https://x.com/TedPillows/status/2120557633694310849",
+    "price_move_pct": {
+     "5m": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "UAEmarkets7",
+    "followers": 9517,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:35:00Z",
+    "post_url": "https://x.com/UAEmarkets7/status/2120556040681099484",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": 0.7
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Stefan_B_Trades",
+    "followers": 33270,
+    "mihenk_score": 6.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T16:11:00Z",
+    "post_url": "https://x.com/Stefan_B_Trades/status/2120549992050139637",
+    "price_move_pct": {
+     "5m": 0.6,
+     "1h": 0.7
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Tryrexcrypto",
+    "followers": 26069,
+    "mihenk_score": 5.2,
+    "direction": "short",
+    "posted_at": "2026-11-11T16:06:00Z",
+    "post_url": "https://x.com/Tryrexcrypto/status/2120548722178441439",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.7,
+     "4h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "wuk_Bitcoin",
+    "followers": 13856,
+    "mihenk_score": 6.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T15:53:00Z",
+    "post_url": "https://x.com/wuk_Bitcoin/status/2120545371759988903",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "eliz883",
+    "followers": 607580,
+    "mihenk_score": 7.5,
+    "direction": "long",
+    "posted_at": "2026-11-11T15:47:00Z",
+    "post_url": "https://x.com/eliz883/status/2120543825181716518",
+    "price_move_pct": {
+     "5m": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Jia_Lilly01",
+    "followers": 63522,
+    "mihenk_score": 6.3,
+    "direction": "short",
+    "posted_at": "2026-11-11T14:44:00Z",
+    "post_url": "https://x.com/Jia_Lilly01/status/2120528145489264857",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": 1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "ZordXBT",
+    "followers": 13388,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T14:25:00Z",
+    "post_url": "https://x.com/ZordXBT/status/2120523381158400423",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": 1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "DieguitoCharts",
+    "followers": 30438,
+    "mihenk_score": 5.6,
+    "direction": "short",
+    "posted_at": "2026-11-11T14:09:00Z",
+    "post_url": "https://x.com/DieguitoCharts/status/2120519234153238591",
+    "price_move_pct": {
+     "5m": -0.5,
+     "1h": 1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "TATrader_Alan",
+    "followers": 76593,
+    "mihenk_score": 6.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T13:16:00Z",
+    "post_url": "https://x.com/TATrader_Alan/status/2120505830638576085",
+    "price_move_pct": {
+     "5m": 0.2,
+     "1h": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoBullet1",
+    "followers": 182611,
+    "mihenk_score": 7.2,
+    "direction": "long",
+    "posted_at": "2026-11-11T13:05:00Z",
+    "post_url": "https://x.com/CryptoBullet1/status/2120503202864857249",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.5
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "riddlerdefi",
+    "followers": 53000,
+    "mihenk_score": 5.8,
+    "direction": "short",
+    "posted_at": "2026-11-11T11:39:00Z",
+    "post_url": "https://x.com/RiddlerDeFi/status/2120481522155491448",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "AltcoinSherpa",
+    "followers": 263654,
+    "mihenk_score": 6.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T11:16:00Z",
+    "post_url": "https://x.com/AltcoinSherpa/status/2120475720610955344",
+    "price_move_pct": {
+     "5m": 0.1,
+     "1h": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Predator_fund",
+    "followers": 32742,
+    "mihenk_score": 6,
+    "direction": "long",
+    "posted_at": "2026-11-11T10:07:00Z",
+    "post_url": "https://x.com/Predator_fund/status/2120458451214328162",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": -0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoGerla",
+    "followers": 33661,
+    "mihenk_score": 7,
+    "direction": "long",
+    "posted_at": "2026-11-11T09:44:00Z",
+    "post_url": "https://x.com/CryptoGerla/status/2120452519885509003",
+    "price_move_pct": {
+     "5m": 0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "marilyn100x",
+    "followers": 12098,
+    "mihenk_score": 6.2,
+    "direction": "long",
+    "posted_at": "2026-11-11T09:34:00Z",
+    "post_url": "https://x.com/marilyn100x/status/2120450170068557937",
+    "price_move_pct": {
+     "5m": -0.4,
+     "1h": 0.1
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "Bitebishuqin",
+    "followers": 24097,
+    "mihenk_score": 5.9,
+    "direction": "long",
+    "posted_at": "2026-11-11T09:07:00Z",
+    "post_url": "https://x.com/Bitebishuqin/status/2120443405386080413",
+    "price_move_pct": {
+     "5m": -0.2
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoTony__",
+    "followers": 568773,
+    "mihenk_score": 6.8,
+    "direction": "long",
+    "posted_at": "2026-11-11T08:29:00Z",
+    "post_url": "https://x.com/CryptoTony__/status/2120433598193123403",
+    "price_move_pct": {
+     "5m": -0.2,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "satofishi",
+    "followers": 100554,
+    "mihenk_score": 6.7,
+    "direction": "long",
+    "posted_at": "2026-11-11T08:06:00Z",
+    "post_url": "https://x.com/satofishi/status/2120427988127003110",
+    "price_move_pct": {
+     "5m": 0,
+     "1h": 0
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "CryptoKeji",
+    "followers": 41020,
+    "mihenk_score": 6.7,
+    "direction": "long",
+    "posted_at": "2026-11-11T07:34:00Z",
+    "post_url": "https://x.com/CryptoKeji/status/2120419997386191182",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.5
+    },
+    "price_source": "Binance"
+   },
+   {
+    "kol": "collageboys01",
+    "followers": 55944,
+    "mihenk_score": 6.6,
+    "direction": "long",
+    "posted_at": "2026-11-11T07:30:00Z",
+    "post_url": "https://x.com/collageboys01/status/2120418929604510190",
+    "price_move_pct": {
+     "5m": -0.1,
+     "1h": -0.5
+    },
+    "price_source": "Binance"
+   }
+  ],
+  "price_move_note": "Price change after the post at 5m / 1h / 4h / 24h; a window appears once it has been measured.",
+  "note": "Independent measurement by Mihenk AI (mihenkai.com). Not investment advice.",
+  "snapshot": "Mihenk AI dataset, last 24h as of 2026-11-12T07:25Z"
+ }
+}
