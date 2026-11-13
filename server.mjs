@@ -2,6 +2,8 @@
 //   1. GET without payment     -> 402 + payment requirements (price, token, payTo, one-time nonce)
 //   2. the agent sends ft_transfer of test USDC on NEAR with memo "mihenk-x402:<nonce>"
 //   3. GET again with X-PAYMENT -> the server reads the transaction from NEAR RPC, checks it, answers 200 + X-PAYMENT-RESPONSE
+// The 402 is a 5-minute quote. A transfer that carries an issued nonce but lands after the quote expired is still
+// served at the quoted price (for up to 24 hours), so an agent that paid never ends up with nothing.
 import http from "node:http";
 import crypto from "node:crypto";
 import fs from "node:fs";
@@ -13,7 +15,19 @@ const HOST = process.env.HOST || "127.0.0.1"; // set HOST=0.0.0.0 to serve other
 const PUBLIC_URL = process.env.PUBLIC_URL || `http://localhost:${PORT}`;
 const cfg = config();
 const DEC = cfg.decimals;
-const nonces = new Map(); // nonce -> { resource, price, exp }
+const QUOTE_MS = Number(process.env.QUOTE_SECONDS || 300) * 1000; // how long a 402 quote is valid
+const KEEP_MS = 24 * 3600e3; // how long an issued nonce can still be settled by a late payment
+const NONCES = "data/nonces.json";
+// nonce -> { resource, price, issued, exp }; kept on disk so a late payment is honoured after a restart too
+const nonces = new Map(fs.existsSync(NONCES)
+  ? Object.entries(JSON.parse(fs.readFileSync(NONCES, "utf8"))).map(([k, v]) => [k, { ...v, price: BigInt(v.price) }])
+  : []);
+function saveNonces() {
+  const now = Date.now();
+  for (const [k, v] of nonces) if (now - v.issued > KEEP_MS) nonces.delete(k);
+  fs.mkdirSync("data", { recursive: true });
+  fs.writeFileSync(NONCES, JSON.stringify(Object.fromEntries([...nonces].map(([k, v]) => [k, { ...v, price: v.price.toString() }]))));
+}
 const USED = "data/used.json";
 const used = new Set(fs.existsSync(USED) ? JSON.parse(fs.readFileSync(USED, "utf8")) : []);
 const pending = new Set(); // tx hashes being verified right now (blocks two parallel requests with one payment)
@@ -22,7 +36,9 @@ const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 function requirements(resource, hours) {
   const nonce = crypto.randomBytes(12).toString("hex");
   const price = priceFor(hours);
-  nonces.set(nonce, { resource, price, exp: Date.now() + 5 * 60e3 });
+  const issued = Date.now();
+  nonces.set(nonce, { resource, price, issued, exp: issued + QUOTE_MS });
+  saveNonces();
   const extra = { decimals: DEC, token: "test USDC", method: "ft_transfer", memo: `mihenk-x402:${nonce}`, nonce };
   // Tell the agent about a cheaper, narrower request it can make instead.
   if (hours > 6) extra.cheaper_option = { hours: 6, maxAmountRequired: priceFor(6).toString() };
@@ -32,7 +48,7 @@ function requirements(resource, hours) {
     accepts: [{
       scheme: "exact", network: NETWORK, maxAmountRequired: price.toString(), asset: cfg.token, payTo: cfg.seller,
       resource, description: `Measured crypto-KOL calls for one coin over the last ${hours}h (Mihenk AI)`,
-      mimeType: "application/json", maxTimeoutSeconds: 300, extra,
+      mimeType: "application/json", maxTimeoutSeconds: QUOTE_MS / 1000, extra,
     }],
   };
 }
@@ -48,13 +64,14 @@ async function verify(payment, resource) {
   const { tx_hash, sender_id, nonce } = payment?.payload || {};
   if (payment?.network !== NETWORK || !tx_hash || !sender_id || !nonce) return "malformed X-PAYMENT";
   const n = nonces.get(nonce);
-  if (!n || n.exp < Date.now()) return "unknown or expired nonce";
+  if (!n || Date.now() - n.issued > KEEP_MS) return "unknown nonce";
+  const late = Date.now() > n.exp; // paid after the quote expired: still served at the quoted price
   if (n.resource !== resource) return "nonce was issued for a different resource";
   if (used.has(tx_hash) || pending.has(tx_hash)) return "payment already used";
   // Reserve the nonce and the transaction before any await, so a parallel request can't reuse them.
   nonces.delete(nonce);
   pending.add(tx_hash);
-  const fail = (reason) => { pending.delete(tx_hash); nonces.set(nonce, n); return reason; };
+  const fail = (reason) => { pending.delete(tx_hash); nonces.set(nonce, n); saveNonces(); return reason; };
   let r;
   try { r = await readTx(tx_hash, sender_id); } catch (e) { return fail(`could not read the transaction (${e.message})`); }
   if (!r?.status || !("SuccessValue" in r.status)) return fail("transaction failed on-chain");
@@ -85,12 +102,14 @@ async function verify(payment, resource) {
   if (!event && !legacy) return fail("the token contract did not log this transfer");
   const block = await rpc("block", { block_id: r.transaction_outcome.block_hash }).catch(() => null);
   if (!block) return fail("could not read the block of the payment");
-  if (Date.now() - Number(BigInt(block.header.timestamp_nanosec) / 1_000_000n) > 600e3) return fail("payment is older than 10 minutes");
+  // The transfer must have been made for this quote: after the nonce was issued (1 minute clock tolerance).
+  if (Number(BigInt(block.header.timestamp_nanosec) / 1_000_000n) < n.issued - 60e3) return fail("payment was made before this nonce was issued");
   pending.delete(tx_hash);
   used.add(tx_hash);
   fs.mkdirSync("data", { recursive: true });
   fs.writeFileSync(USED, JSON.stringify([...used]));
-  return { ok: true, tx_hash, payer: sender_id, paid: BigInt(args.amount) };
+  saveNonces();
+  return { ok: true, tx_hash, payer: sender_id, paid: BigInt(args.amount), late };
 }
 
 const send = (res, code, body, headers = {}) => {
@@ -127,10 +146,10 @@ http.createServer(async (req, res) => {
       return send(res, 402, { ...requirements(resource, hours), error: v });
     }
     const data = coinCalls(m[1], hours);
-    log("200 paid", units(v.paid, DEC), "by", v.payer, txLink(v.tx_hash));
+    log("200 paid", units(v.paid, DEC), "by", v.payer, txLink(v.tx_hash), v.late ? "(paid after the quote expired; served at the quoted price)" : "");
     return send(res, 200, data, { "X-PAYMENT-RESPONSE": b64({ success: true, transaction: v.tx_hash, network: NETWORK, payer: v.payer }) });
   } catch (e) {
     log("error", e.message);
     return send(res, 500, { error: "internal_error" });
   }
-}).listen(PORT, HOST, () => log(`listening on ${HOST}:${PORT} (${source}); token ${cfg.token}; payTo ${cfg.seller}`));
+}).listen(PORT, HOST, () => log(`listening on ${HOST}:${PORT} (${source}); token ${cfg.token}; payTo ${cfg.seller}; quote ${QUOTE_MS / 1000}s`));

@@ -3,3 +3,4 @@ keys/
 data/used.json
 receipts.jsonl
 *.log
+data/nonces.json

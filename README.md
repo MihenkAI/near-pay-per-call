@@ -33,9 +33,11 @@ Before it answers, the server reads the transaction from NEAR RPC and checks tha
 - it was signed by the account named in `X-PAYMENT` and calls `ft_transfer` on the expected token contract;
 - the transfer goes to the seller, for at least the quoted price, with the memo `mihenk-x402:<nonce>` the server issued for this exact request;
 - the token contract itself logged the transfer (a NEP-141 event, or the `Transfer … / Memo …` log lines older NEP-141 contracts such as `usdc.fakes.testnet` write);
-- the payment is less than 10 minutes old and its transaction hash was never used before.
+- the transfer was made after that nonce was issued, and its transaction hash was never used before.
 
 The nonce and the transaction hash are reserved before the server waits on RPC, so two parallel requests can't share one payment. The messages follow x402 v1 (`accepts`, `X-PAYMENT`, `X-PAYMENT-RESPONSE`, scheme `exact`); on NEAR this repo uses a pay-then-prove variant without a facilitator: the agent submits the transfer itself and the server verifies it on-chain.
+
+The 402 is a quote that lasts 5 minutes (`maxTimeoutSeconds: 300`); in our test runs the agent's transfer landed 10–18 seconds after the 402. If a transfer that carries an issued nonce lands after the quote has expired, the server still serves the data at the quoted price, for up to 24 hours, so an agent that paid never ends up with nothing. Issued nonces are kept in `data/nonces.json`, so this also holds after a restart, and each nonce and transaction hash still buys exactly one call.
 
 ## What the agent does
 
@@ -67,6 +69,13 @@ node agent.mjs ETH --budget 0.007   # 24h costs 0.01: the agent asks for the 6h 
 node agent.mjs BTC --budget 0.003   # still above budget: the agent does not pay
 npm test                            # PASS: one payment buys exactly one call; underpayment is refused
 cat receipts.jsonl                  # the agent's record of what it bought
+```
+
+To also check a late payment, restart the server with a short quote and run the tests again:
+
+```bash
+QUOTE_SECONDS=5 npm run server &
+npm test   # ... the agent pays 7 seconds after a 5-second quote and still gets the data; the same payment again is refused
 ```
 
 Without Mihenk's database the server answers from `data/sample.json`, a snapshot of the last 24 hours of Mihenk data for NEAR, SOL, BTC and ETH taken on 12 November 2026 (07:25 UTC); a 6-hour request returns that same 24-hour snapshot. With `MIHENK_DB` pointing to Mihenk's SQLite dataset it answers with live data. Keys and account names are written to `keys/` (git-ignored).
@@ -108,15 +117,17 @@ Over budget, it narrows the request once, then refuses:
 [agent 07:27:04] price is above my remaining budget (0.003), not paying
 ```
 
-A reused or underpaid payment is refused:
+A reused or underpaid payment is refused, and a late payment is still served (server started with `QUOTE_SECONDS=5`; recorded on 13 November 2026, 17:39–17:40 UTC):
 
 ```
-[test] paid once: AfHPQvxWkyeR2zsk3jjHtjAiQcisgveNBJxThFu1p2z7
+[test] paid once: H76fbkokrauazE4rXtxSYFyxt1GGR5YJRcn82u4P1yCV
 [test] first call with the payment  -> 200
 [test] same payment, new request    -> 402 payment already used
-[test] same payment, made-up nonce  -> 402 unknown or expired nonce
+[test] same payment, made-up nonce  -> 402 unknown nonce
 [test] underpaid transfer (1/10)    -> 402 paid 1000 units, 10000 required
-[test] PASS: one payment buys exactly one call; underpayment is refused
+[test] paid 7s after a 5s quote -> 200
+[test] same late payment again       -> 402 unknown nonce
+[test] PASS: one payment buys exactly one call; underpayment is refused; a late payment is still served
 ```
 
 ## Files
@@ -126,7 +137,7 @@ A reused or underpaid payment is refused:
 | `server.mjs` | The pay-per-call API: 402 with payment requirements, verification on NEAR RPC, data with a receipt |
 | `agent.mjs` | Buyer agent: budget, trusted sellers, one narrower request when over budget, pays with `ft_transfer`, keeps receipts |
 | `setup.mjs` | Testnet accounts from the faucet, storage registration and test USDC for the agent |
-| `test.mjs` | Payment checks: one payment buys exactly one call; underpayment is refused |
+| `test.mjs` | Payment checks: one payment buys exactly one call; underpayment is refused; a late payment is still served |
 | `lib.mjs` | Shared config, NEAR connection, RPC and prices |
 | `data.mjs` | Read-only access to Mihenk's measured KOL calls, or the offline sample |
 | `mksample.mjs` | Maintainer script that writes `data/sample.json` from Mihenk's dataset |
@@ -143,7 +154,7 @@ NEAR is the payment and identity layer: the agent and the seller are NEAR accoun
 
 ## How this was built
 
-All code in this repository was written inside the hackathon window: `data.mjs` comes from our Solana prototype of 8 November 2026, and everything else was written on 12 November 2026. The 402 handshake follows the design of our earlier Solana prototype ([MihenkAI/solana-pay-per-call](https://github.com/MihenkAI/solana-pay-per-call), November 2026); everything NEAR-specific (accounts, `ft_transfer` payments, RPC verification) and the agent's narrower-request, trusted-seller and receipt logic are new here. The code was written with AI assistance (Claude). Libraries: [near-api-js](https://github.com/near/near-api-js) 5.1.1 and Node's built-in `node:sqlite`. Test USDC: `usdc.fakes.testnet`, a public test token on NEAR testnet.
+All code in this repository was written inside the hackathon window: `data.mjs` comes from our Solana prototype of 8 November 2026, and everything else was written on 12 November 2026; the late-payment handling was added on 13 November 2026. The 402 handshake follows the design of our earlier Solana prototype ([MihenkAI/solana-pay-per-call](https://github.com/MihenkAI/solana-pay-per-call), November 2026); everything NEAR-specific (accounts, `ft_transfer` payments, RPC verification) and the agent's narrower-request, trusted-seller and receipt logic are new here. The code was written with AI assistance (Claude). Libraries: [near-api-js](https://github.com/near/near-api-js) 5.1.1 and Node's built-in `node:sqlite`. Test USDC: `usdc.fakes.testnet`, a public test token on NEAR testnet.
 
 ## About Mihenk AI
 
