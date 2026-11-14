@@ -2,7 +2,7 @@
 
 AI agents buy measured crypto-influencer (KOL) data one call at a time and pay for it in USDC on NEAR. There is no account and no API key. The API answers `402 Payment Required`, the agent pays with a NEP-141 `ft_transfer` on NEAR, and the data comes back with a receipt.
 
-Built at **NEAR HACKATHON (1–14 November 2026)** for the **Agent Economy**, **AI Security & Defense** and **Open Innovation** tracks<!--DEFI-TRACK-->. Demo video: [demo/mihenk-near-pay-per-call.mp4](demo/mihenk-near-pay-per-call.mp4)
+Built at **NEAR HACKATHON (1–14 November 2026)** for the **Agent Economy**, **AI Security & Defense**, **Unstoppable DeFi** and **Open Innovation** tracks. Demo video: [demo/mihenk-near-pay-per-call.mp4](demo/mihenk-near-pay-per-call.mp4)
 
 It runs on NEAR testnet with test USDC and on NEAR mainnet with Circle's native USDC: see [a real paid call on mainnet](#on-near-mainnet). The agent can then act on the data it paid for with a small, capped swap through NEAR Intents: see [one-tap trade](#one-tap-trade-through-near-intents).
 
@@ -196,7 +196,7 @@ Mihenk's social trading lets a person act on a KOL call with one tap from their 
 
 1. it reads the calls it paid for (`data/bought-<COIN>.json`, written by `agent.mjs`), and only if they were bought on the same network within the last 6 hours;
 2. it trades only if most measured KOLs called the coin long; otherwise it stops;
-3. it asks the NEAR Intents [1Click API](https://docs.near-intents.org/near-intents/integration/distribution-channels/1click-api) for a quote: USDC on NEAR to wNEAR, delivered to the agent's own account (SOL, ETH and BTC are delivered on their own chains with `--to <address>`);
+3. it asks the NEAR Intents [1Click API](https://docs.near-intents.org/near-intents/integration/distribution-channels/1click-api) for a quote: USDC on NEAR to NEAR, delivered to the agent's own account (SOL, ETH and BTC are delivered on their own chains with `--to <address>`);
 4. with `--execute`, it sends the USDC to the quote's deposit address, NEAR Intents solvers deliver the coin, and the result is logged to `trades.jsonl`.
 
 ```bash
@@ -204,7 +204,24 @@ NEAR_ENV=mainnet node trade.mjs NEAR --usdc 0.5             # decision and quote
 NEAR_ENV=mainnet node trade.mjs NEAR --usdc 0.5 --execute   # sends 0.5 USDC (capped by MAX_TRADE_USDC, 1 by default)
 ```
 
-<!--TRADE-RUN-->
+Recorded on 14 November 2026, 21:13–21:15 UTC, on NEAR mainnet, using the data the agent bought in the paid call above (the script prints the three latest of the five calls; all five are in the agent's log above):
+
+```
+[trade 21:13:52] paid data: $NEAR calls, last 24h, bought 2026-11-14T21:09:06.555Z: 5 calls from 5 KOLs (3 long, 2 short)
+[trade 21:13:52]   @LSDinmycoffee short at 2026-11-14T16:38:00Z
+[trade 21:13:52]   @CryptoTony__ short at 2026-11-14T13:56:00Z
+[trade 21:13:52]   @Waleedahmed234 long at 2026-11-14T10:31:00Z
+[trade 21:13:52] most measured KOLs are long: buying $NEAR with 0.5 USDC through NEAR Intents
+[trade 21:13:53] quote: 0.5 USDC -> 0.170123 NEAR on NEAR (about $0.50), to f90585d5069f3fe6d2c228866f6caf9843e596149b4c56bf219fdbbe44427bcf
+[trade 21:14:34] sent 0.5 USDC to the NEAR Intents deposit address: https://nearblocks.io/txns/8sAhvMfJhKEcBCQNMmKFS5Moe45Kjbztaad2ppU9nQvf
+[trade 21:14:40] status: PENDING_DEPOSIT
+[trade 21:14:58] status: PROCESSING
+[trade 21:15:23] status: SUCCESS
+[trade 21:15:23] done: 0.170751 NEAR delivered to f90585d5069f3fe6d2c228866f6caf9843e596149b4c56bf219fdbbe44427bcf
+[trade 21:15:26] agent wallet now holds 2.433 USDC
+```
+
+About 50 seconds from the deposit to delivery; the NEAR arrived in the agent's own account from `intents.near`.
 
 This shows an agent acting on measured data inside hard limits; it is not a trading strategy.
 
@@ -230,7 +247,7 @@ NEAR is the payment and identity layer: the agent and the seller are NEAR accoun
 - **Agent Economy:** an agent with its own NEAR account buys data per call, with no sign-up and no API key, and keeps receipts.
 - **AI Security & Defense:** the [guardrails](#guardrails): the agent's budget, seller allow-list, delivery check and trade cap, and payments bound to one request that the server proves on-chain.
 - **Open Innovation:** an x402-style 402 handshake on NEAR without a facilitator, selling measured influencer data to agents.
-<!--DEFI-BULLET-->
+- **Unstoppable DeFi:** the agent turns the data it paid for into a capped swap through NEAR Intents on mainnet, from its own account and with no exchange account (recorded [above](#one-tap-trade-through-near-intents)).
 
 ## What's next
 

@@ -21,7 +21,7 @@ const coin = (args[0] || "NEAR").replace(/^\$/, "").toUpperCase();
 const cfg = config();
 const agent = await account("agent");
 const say = (...a) => console.log(`[trade ${new Date().toISOString().slice(11, 19)}]`, ...a);
-// Where the bought coin goes. NEAR stays on NEAR (wNEAR to the agent's own account); other chains need --to.
+// Where the bought coin goes. NEAR stays on NEAR (asset wrap.near; it arrives in the agent's own account as NEAR); other chains need --to.
 const DEST = { NEAR: { asset: "nep141:wrap.near", recipient: agent.accountId, chain: "NEAR" },
   SOL: { asset: "nep141:sol.omft.near", chain: "Solana" }, ETH: { asset: "nep141:eth.omft.near", chain: "Ethereum" },
   BTC: { asset: "nep141:btc.omft.near", chain: "Bitcoin" } }[coin];
@@ -58,7 +58,7 @@ say(`quote: ${Q.amountInFormatted} ${TOKEN_LABEL} -> ${fmt(Q.amountOutFormatted)
 if (!execute) { say("dry run: nothing was sent. Add --execute to send the USDC."); process.exit(0); }
 
 // 3. Pay the deposit address. It must be registered on the USDC contract to receive it, and a NEAR recipient
-//    must be registered on the coin's contract (wrap.near) so the solvers can deliver to it.
+//    is registered on the coin's contract (wrap.near) too, in case the coin is delivered as wNEAR.
 const dep = Q.depositAddress;
 if ((await balance(agent.accountId)) < BigInt(amount)) { say(`not enough ${TOKEN_LABEL} in ${agent.accountId}`); process.exit(1); }
 async function register(contractId, account_id) {
