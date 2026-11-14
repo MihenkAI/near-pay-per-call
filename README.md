@@ -4,7 +4,36 @@ AI agents buy measured crypto-influencer (KOL) data one call at a time and pay f
 
 Built at **NEAR HACKATHON (1–14 November 2026)** for the **Agent Economy**, **AI Security & Defense**, **Unstoppable DeFi** and **Open Innovation** tracks. Demo video: [demo/mihenk-near-pay-per-call.mp4](demo/mihenk-near-pay-per-call.mp4)
 
-It runs on NEAR testnet with test USDC and on NEAR mainnet with Circle's native USDC: see [a real paid call on mainnet](#on-near-mainnet). The agent can then act on the data it paid for with a small, capped swap through NEAR Intents: see [one-tap trade](#one-tap-trade-through-near-intents).
+It runs on NEAR testnet with test USDC and on NEAR mainnet with Circle's native USDC: [try it live](#try-it-live), or see [a real paid call on mainnet](#on-near-mainnet). The agent can then act on the data it paid for with a small, capped swap through NEAR Intents: see [one-tap trade](#one-tap-trade-through-near-intents).
+
+## Try it live
+
+The API runs at two public addresses through at least 25 November 2026:
+
+| Network | Address | Payment |
+|---|---|---|
+| NEAR mainnet | https://app.mihenkai.com/near | Circle's native USDC on NEAR, paid to `mihenkai.near` |
+| NEAR testnet | https://app.mihenkai.com/near-testnet | test USDC (`usdc.fakes.testnet`) |
+
+See the 402 without installing anything:
+
+```bash
+curl -i "https://app.mihenkai.com/near/v1/coin/NEAR/calls?hours=24"
+# HTTP/2 402 with "network": "near-mainnet", "maxAmountRequired": "10000" (0.01 USDC), "payTo": "mihenkai.near"
+# and a one-time "memo": "mihenk-x402:<nonce>" that the payment must carry
+```
+
+Run the buyer agent against the hosted testnet API, with free test USDC and no server to start:
+
+```bash
+npm install
+npm run setup   # your own agent and seller on testnet, 5 test USDC for the agent
+TRUSTED_SELLERS=mihenk-seller-mwd7gisu9305.testnet node agent.mjs NEAR --budget 0.02 --api https://app.mihenkai.com/near-testnet
+```
+
+You should see `402 Payment Required: 0.01 test USDC to mihenk-seller-mwd7gisu9305.testnet`, then `paid on near-testnet: https://testnet.nearblocks.io/txns/…` and `bought $NEAR calls, last 24h; check passed`. `TRUSTED_SELLERS` adds the hosted seller to the agent's allow-list; without it the agent refuses to pay, which is the allow-list doing its job. A run against the hosted API on 14 November 2026, 22:29 UTC: [2ttpPRZj…](https://testnet.nearblocks.io/txns/2ttpPRZj3rc4ppaCoh4skCu1MeFpV7BcHe1WNvBpWkSH).
+
+The one-tap trade (`trade.mjs`) moves the agent's own funds, so it is not a public endpoint; the recorded mainnet swap is [below](#one-tap-trade-through-near-intents). With your own funded mainnet agent (`SELLER=mihenkai.near npm run setup:mainnet`), `NEAR_ENV=mainnet node agent.mjs NEAR --api https://app.mihenkai.com/near` buys a call for 0.01 USDC, and `NEAR_ENV=mainnet node trade.mjs NEAR --usdc 0.5` then shows the decision and a live NEAR Intents quote without sending anything.
 
 ## Why
 
@@ -256,7 +285,7 @@ NEAR is the payment and identity layer: the agent and the seller are NEAR accoun
 
 ## How this was built
 
-All code in this repository was written inside the hackathon window: `data.mjs` comes from our Solana prototype of 8 November 2026, and everything else was written on 12 November 2026; the late-payment handling was added on 13 November 2026, and mainnet support with native USDC, the saved purchases and `trade.mjs` (NEAR Intents) on 14 November 2026. The 402 handshake follows the design of our earlier Solana prototype ([MihenkAI/solana-pay-per-call](https://github.com/MihenkAI/solana-pay-per-call), November 2026); everything NEAR-specific (accounts, `ft_transfer` payments, RPC verification, NEAR Intents) and the agent's narrower-request, trusted-seller and receipt logic are new here. The code was written with AI assistance (Claude). Libraries: [near-api-js](https://github.com/near/near-api-js) 5.1.1 and Node's built-in `node:sqlite`; swaps use the NEAR Intents 1Click API. Test USDC: `usdc.fakes.testnet`, a public test token on NEAR testnet.
+All code in this repository was written inside the hackathon window: `data.mjs` comes from our Solana prototype of 8 November 2026, and everything else was written on 12 November 2026; the late-payment handling was added on 13 November 2026, and mainnet support with native USDC, the saved purchases and `trade.mjs` (NEAR Intents) on 14 November 2026, when the hosted demo also went live. The 402 handshake follows the design of our earlier Solana prototype ([MihenkAI/solana-pay-per-call](https://github.com/MihenkAI/solana-pay-per-call), November 2026); everything NEAR-specific (accounts, `ft_transfer` payments, RPC verification, NEAR Intents) and the agent's narrower-request, trusted-seller and receipt logic are new here. The code was written with AI assistance (Claude). Libraries: [near-api-js](https://github.com/near/near-api-js) 5.1.1 and Node's built-in `node:sqlite`; swaps use the NEAR Intents 1Click API. Test USDC: `usdc.fakes.testnet`, a public test token on NEAR testnet.
 
 ## About Mihenk AI
 
