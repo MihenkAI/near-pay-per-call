@@ -2,7 +2,9 @@
 
 AI agents buy measured crypto-influencer (KOL) data one call at a time and pay for it in USDC on NEAR. There is no account and no API key. The API answers `402 Payment Required`, the agent pays with a NEP-141 `ft_transfer` on NEAR, and the data comes back with a receipt.
 
-Built at **NEAR HACKATHON (1–14 November 2026)** for the **Agent Economy** track. Demo video: [demo/mihenk-near-pay-per-call.mp4](demo/mihenk-near-pay-per-call.mp4)
+Built at **NEAR HACKATHON (1–14 November 2026)** for the **Agent Economy**, **AI Security & Defense** and **Open Innovation** tracks<!--DEFI-TRACK-->. Demo video: [demo/mihenk-near-pay-per-call.mp4](demo/mihenk-near-pay-per-call.mp4)
+
+It runs on NEAR testnet with test USDC and on NEAR mainnet with Circle's native USDC: see [a real paid call on mainnet](#on-near-mainnet). The agent can then act on the data it paid for with a small, capped swap through NEAR Intents: see [one-tap trade](#one-tap-trade-through-near-intents).
 
 ## Why
 
@@ -11,12 +13,12 @@ When a crypto influencer calls a coin, traders and trading agents act on it with
 ## How it works
 
 ```
-agent (own NEAR testnet account)        API (server.mjs)                          NEAR testnet
+agent (own NEAR account)                API (server.mjs)                          NEAR
   | GET /v1/coin/NEAR/calls?hours=24        |                                          |
   |---------------------------------------->|                                          |
   | 402 {price, token, payTo, nonce}        |                                          |
   |<----------------------------------------|                                          |
-  | ft_transfer(payTo, price, memo "mihenk-x402:<nonce>") on the test USDC contract     |
+  | ft_transfer(payTo, price, memo "mihenk-x402:<nonce>") on the USDC contract          |
   |------------------------------------------------------------------------------------>|
   | GET again, X-PAYMENT: {tx_hash, sender_id, nonce}                                   |
   |---------------------------------------->| RPC tx(tx_hash, sender_id, wait FINAL)   |
@@ -41,18 +43,37 @@ The 402 is a quote that lasts 5 minutes (`maxTimeoutSeconds: 300`); in our test 
 
 ## What the agent does
 
-`agent.mjs` is a small buyer with its own NEAR testnet account and a spending budget:
+`agent.mjs` is a small buyer with its own NEAR account and a spending budget:
 
 - it reads the price from the 402 and pays only if the price fits its remaining budget;
 - if the 24-hour window costs more than it has left, it asks once for the cheaper 6-hour window the server offers, and walks away if that is still too much;
-- it pays only sellers and tokens it trusts (the seller in `keys/config.json`, plus any in `TRUSTED_SELLERS`), whatever a 402 response asks for;
-- after each purchase it checks what it received (right coin, consistent counts) and appends a receipt to `receipts.jsonl`: what it bought, from whom, the price, the NEAR transaction and whether the delivery passed its check.
+- it pays only sellers and tokens it trusts (the seller in its `config.json`, plus any in `TRUSTED_SELLERS`), whatever a 402 response asks for;
+- after each purchase it checks what it received (right coin, consistent counts) and appends a receipt to `receipts.jsonl`: what it bought, from whom, the price, the NEAR transaction and whether the delivery passed its check. Data that passed the check is saved to `data/bought-<COIN>.json`, where `trade.mjs` can act on it.
 
-Prices: 0.005 test USDC for up to 6 hours of calls, 0.01 for up to 24 hours, 0.03 for up to 7 days.
+Prices: 0.005 USDC for up to 6 hours of calls, 0.01 for up to 24 hours, 0.03 for up to 7 days (test USDC on testnet).
+
+## Guardrails
+
+An agent that holds money needs limits it can't talk itself out of, and a seller needs payments that can't be faked or reused. Both are enforced in code, not in a prompt.
+
+The agent (`agent.mjs`, `trade.mjs`):
+
+- **Budget:** it pays only if the quoted price fits what is left of its budget; over budget, it asks once for the narrower, cheaper request the server offers, then stops.
+- **Allow-list:** it pays only the seller and token in its own config, so a spoofed or malicious 402 can't send its money elsewhere.
+- **Delivery check and receipts:** it checks what it received and keeps a receipt with the NEAR transaction for every purchase.
+- **Capped trades:** `trade.mjs` acts only on data the agent paid for on the same network in the last 6 hours, never on a tip; each swap is capped (`MAX_TRADE_USDC`, 1 USDC by default), a refund goes back to the agent's own account, and nothing is sent without `--execute`.
+
+The seller (`server.mjs`):
+
+- **One payment, one call:** each 402 carries a one-time nonce bound to that exact request, and the transfer must carry it in its memo. The nonce and the transaction hash are reserved before any network wait and burned after use, so a payment can't be replayed or shared by parallel requests.
+- **Proof from the chain, not from the client:** the server reads the finalized transaction and the token contract's own log. Underpaid, failed, wrong-token, wrong-recipient and earlier transfers are refused (`npm test` checks the replay and underpayment cases).
+- **Fair to the payer:** a late payment for an issued nonce is still served, for up to 24 hours.
+
+The data is a reputation check in itself: for each call the agent sees who made it and how the price moved after it, measured from market data rather than claimed.
 
 ## Run it
 
-Requires Node 22.13 or newer. Everything runs on NEAR testnet; nothing needs real funds.
+Requires Node 22.13 or newer. The steps below run on NEAR testnet and need no real funds; for real USDC, see [On NEAR mainnet](#on-near-mainnet).
 
 ```bash
 npm install
@@ -78,7 +99,7 @@ QUOTE_SECONDS=5 npm run server &
 npm test   # ... the agent pays 7 seconds after a 5-second quote and still gets the data; the same payment again is refused
 ```
 
-Without Mihenk's database the server answers from `data/sample.json`, a snapshot of the last 24 hours of Mihenk data for NEAR, SOL, BTC and ETH taken on 12 November 2026 (07:25 UTC); a 6-hour request returns that same 24-hour snapshot. With `MIHENK_DB` pointing to Mihenk's SQLite dataset it answers with live data. Keys and account names are written to `keys/` (git-ignored).
+Without Mihenk's database the server answers from `data/sample.json`, a snapshot of the last 24 hours of Mihenk data for NEAR, SOL, BTC and ETH taken on 12 November 2026 (07:25 UTC); a 6-hour request returns that same 24-hour snapshot. With `MIHENK_DB` pointing to Mihenk's SQLite dataset it answers with live data. Keys and account names are written to `keys/` (`keys-mainnet/` on mainnet), both git-ignored.
 
 ## Example run
 
@@ -130,31 +151,95 @@ A reused or underpaid payment is refused, and a late payment is still served (se
 [test] PASS: one payment buys exactly one call; underpayment is refused; a late payment is still served
 ```
 
+## On NEAR mainnet
+
+With `NEAR_ENV=mainnet` the same code runs on NEAR mainnet and takes Circle's native USDC on NEAR (`17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1`, 6 decimals). Payments go to the seller account you name; it only receives, so its key never touches the server. The agent is a NEAR implicit account whose key stays on the machine that runs it.
+
+```bash
+SELLER=<your account>.near npm run setup:mainnet   # 1st run: creates the agent account; send it ~0.3 NEAR and some USDC on NEAR
+SELLER=<your account>.near npm run setup:mainnet   # 2nd run: registers the agent and the seller on the USDC contract
+npm run server:mainnet &                           # API on http://127.0.0.1:8404, paid in USDC
+npm run agent:mainnet                              # buys 24h of $NEAR calls for 0.01 USDC, budget 0.02
+```
+
+Recorded on 14 November 2026, 21:08–21:09 UTC, on NEAR mainnet, with the server on Mihenk's live dataset (times in the logs are UTC). The payment is a real 0.01 USDC transfer to `mihenkai.near`, the team's account; the transaction link is public.
+
+```
+[agent 21:08:49] wallet f90585d5069f3fe6d2c228866f6caf9843e596149b4c56bf219fdbbe44427bcf holds 2.943 USDC on near-mainnet; budget 0.02
+[agent 21:08:49] GET http://localhost:8404/v1/coin/NEAR/calls?hours=24
+[agent 21:08:49] 402 Payment Required: 0.01 USDC to mihenkai.near
+[agent 21:09:00] paid on near-mainnet: https://nearblocks.io/txns/9EhcArnaa5CAhxmcfVZm42hPGHG4Uos45msjYa729Nmn
+[agent 21:09:06] receipt: {"success":true,"transaction":"9EhcArnaa5CAhxmcfVZm42hPGHG4Uos45msjYa729Nmn","network":"near-mainnet","payer":"f90585d5069f3fe6d2c228866f6caf9843e596149b4c56bf219fdbbe44427bcf"}
+[agent 21:09:06] bought $NEAR calls, last 24h; check passed
+[agent 21:09:06]   5 calls from 5 KOLs (3 long, 2 short)
+[agent 21:09:06]   @LSDinmycoffee (151,580 followers) short at 2026-11-14T16:38:00Z -> 5m +0.3%, 1h +0.6% (Binance)
+[agent 21:09:06]   @CryptoTony__ (568,724 followers) short at 2026-11-14T13:56:00Z -> 5m -1.7%, 1h -2.7% (Binance)
+[agent 21:09:06]   @Waleedahmed234 (19,402 followers) long at 2026-11-14T10:31:00Z -> 5m 0%, 1h +0.1% (Binance)
+[agent 21:09:06]   @CryptoMillionYT (68,215 followers) long at 2026-11-14T07:10:00Z -> 5m -0.5%, 1h -0.1% (Binance)
+[agent 21:09:06]   @watchingmarkets (59,257 followers) long at 2026-11-13T23:58:00Z -> 5m +0.8%, 1h +0.1% (Binance)
+[agent 21:09:09] done; remaining budget 0.01 USDC, wallet 2.933; receipts in receipts.jsonl
+```
+
+The server's side of the same call:
+
+```
+21:08:41 listening on 127.0.0.1:8404 (Mihenk AI measured dataset); token 17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1; payTo mihenkai.near; quote 300s
+21:08:49 402 /v1/coin/NEAR/calls 24h price 0.01
+21:09:06 200 paid 0.01 by f90585d5069f3fe6d2c228866f6caf9843e596149b4c56bf219fdbbe44427bcf https://nearblocks.io/txns/9EhcArnaa5CAhxmcfVZm42hPGHG4Uos45msjYa729Nmn
+```
+
+The agent's USDC came from its own NEAR: before the run, 1 NEAR was swapped for 2.943 USDC on NEAR through the same NEAR Intents 1Click API.
+
+## One-tap trade through NEAR Intents
+
+Mihenk's social trading lets a person act on a KOL call with one tap from their own wallet. `trade.mjs` gives the agent the same step on NEAR mainnet:
+
+1. it reads the calls it paid for (`data/bought-<COIN>.json`, written by `agent.mjs`), and only if they were bought on the same network within the last 6 hours;
+2. it trades only if most measured KOLs called the coin long; otherwise it stops;
+3. it asks the NEAR Intents [1Click API](https://docs.near-intents.org/near-intents/integration/distribution-channels/1click-api) for a quote: USDC on NEAR to wNEAR, delivered to the agent's own account (SOL, ETH and BTC are delivered on their own chains with `--to <address>`);
+4. with `--execute`, it sends the USDC to the quote's deposit address, NEAR Intents solvers deliver the coin, and the result is logged to `trades.jsonl`.
+
+```bash
+NEAR_ENV=mainnet node trade.mjs NEAR --usdc 0.5             # decision and quote only; nothing is sent
+NEAR_ENV=mainnet node trade.mjs NEAR --usdc 0.5 --execute   # sends 0.5 USDC (capped by MAX_TRADE_USDC, 1 by default)
+```
+
+<!--TRADE-RUN-->
+
+This shows an agent acting on measured data inside hard limits; it is not a trading strategy.
+
 ## Files
 
 | File | What it does |
 |---|---|
 | `server.mjs` | The pay-per-call API: 402 with payment requirements, verification on NEAR RPC, data with a receipt |
-| `agent.mjs` | Buyer agent: budget, trusted sellers, one narrower request when over budget, pays with `ft_transfer`, keeps receipts |
-| `setup.mjs` | Testnet accounts from the faucet, storage registration and test USDC for the agent |
+| `agent.mjs` | Buyer agent: budget, trusted sellers, one narrower request when over budget, pays with `ft_transfer`, keeps receipts and the data it bought |
+| `trade.mjs` | Acts on the data the agent paid for: a capped swap through the NEAR Intents 1Click API (mainnet) |
+| `setup.mjs` | Testnet: accounts from the faucet, storage registration and test USDC for the agent. Mainnet: the agent account and USDC registration |
 | `test.mjs` | Payment checks: one payment buys exactly one call; underpayment is refused; a late payment is still served |
-| `lib.mjs` | Shared config, NEAR connection, RPC and prices |
+| `lib.mjs` | Shared config, network switch (testnet or mainnet), NEAR connection, RPC and prices |
 | `data.mjs` | Read-only access to Mihenk's measured KOL calls, or the offline sample |
 | `mksample.mjs` | Maintainer script that writes `data/sample.json` from Mihenk's dataset |
 
 ## NEAR's role
 
-NEAR is the payment and identity layer: the agent and the seller are NEAR accounts, each call is paid with a NEP-141 `ft_transfer` whose memo binds the payment to one request, and the server proves the payment by reading the finalized transaction and the token contract's own logs from NEAR RPC. Human-readable accounts make receipts easy to audit, and because `ft_transfer` requires a 1 yoctoNEAR deposit, a payment can only be signed with the account's full-access key.
+NEAR is the payment and identity layer: the agent and the seller are NEAR accounts, each call is paid with a NEP-141 `ft_transfer` whose memo binds the payment to one request, and the server proves the payment by reading the finalized transaction and the token contract's own logs from NEAR RPC. Human-readable accounts make receipts easy to audit, and because `ft_transfer` requires a 1 yoctoNEAR deposit, a payment can only be signed with the account's full-access key. On mainnet, NEAR Intents lets the same agent turn what it bought into a swap: it sends USDC to a deposit address and solvers deliver the coin, on NEAR or on another chain.
+
+## Hackathon tracks
+
+- **Agent Economy:** an agent with its own NEAR account buys data per call, with no sign-up and no API key, and keeps receipts.
+- **AI Security & Defense:** the [guardrails](#guardrails): the agent's budget, seller allow-list, delivery check and trade cap, and payments bound to one request that the server proves on-chain.
+- **Open Innovation:** an x402-style 402 handshake on NEAR without a facilitator, selling measured influencer data to agents.
+<!--DEFI-BULLET-->
 
 ## What's next
 
-- The same flow with Circle's native USDC on NEAR mainnet.
-- NEAR Intents, so an agent can pay from any chain it holds funds on.
+- Agents paying from any chain they hold funds on, through NEAR Intents.
 - NEAR as a payment option in Mihenk's live x402 Agent API, which already takes USDC on Base, Arc and Polygon.
 
 ## How this was built
 
-All code in this repository was written inside the hackathon window: `data.mjs` comes from our Solana prototype of 8 November 2026, and everything else was written on 12 November 2026; the late-payment handling was added on 13 November 2026. The 402 handshake follows the design of our earlier Solana prototype ([MihenkAI/solana-pay-per-call](https://github.com/MihenkAI/solana-pay-per-call), November 2026); everything NEAR-specific (accounts, `ft_transfer` payments, RPC verification) and the agent's narrower-request, trusted-seller and receipt logic are new here. The code was written with AI assistance (Claude). Libraries: [near-api-js](https://github.com/near/near-api-js) 5.1.1 and Node's built-in `node:sqlite`. Test USDC: `usdc.fakes.testnet`, a public test token on NEAR testnet.
+All code in this repository was written inside the hackathon window: `data.mjs` comes from our Solana prototype of 8 November 2026, and everything else was written on 12 November 2026; the late-payment handling was added on 13 November 2026, and mainnet support with native USDC, the saved purchases and `trade.mjs` (NEAR Intents) on 14 November 2026. The 402 handshake follows the design of our earlier Solana prototype ([MihenkAI/solana-pay-per-call](https://github.com/MihenkAI/solana-pay-per-call), November 2026); everything NEAR-specific (accounts, `ft_transfer` payments, RPC verification, NEAR Intents) and the agent's narrower-request, trusted-seller and receipt logic are new here. The code was written with AI assistance (Claude). Libraries: [near-api-js](https://github.com/near/near-api-js) 5.1.1 and Node's built-in `node:sqlite`; swaps use the NEAR Intents 1Click API. Test USDC: `usdc.fakes.testnet`, a public test token on NEAR testnet.
 
 ## About Mihenk AI
 

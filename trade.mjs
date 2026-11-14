@@ -53,17 +53,22 @@ const r = await fetch(`${ONECLICK}/quote`, { method: "POST", headers: { "content
 const q = await r.json();
 if (!r.ok || !q.quote) { say(`no quote: HTTP ${r.status} ${JSON.stringify(q).slice(0, 300)}`); process.exit(1); }
 const Q = q.quote;
-say(`quote: ${Q.amountInFormatted} ${TOKEN_LABEL} -> ${Q.amountOutFormatted} ${coin} on ${DEST.chain} (about $${Q.amountOutUsd}), to ${recipient}`);
+const fmt = (x) => String(Number(Number(x).toFixed(6)));
+say(`quote: ${Q.amountInFormatted} ${TOKEN_LABEL} -> ${fmt(Q.amountOutFormatted)} ${coin} on ${DEST.chain} (about $${Number(Q.amountOutUsd).toFixed(2)}), to ${recipient}`);
 if (!execute) { say("dry run: nothing was sent. Add --execute to send the USDC."); process.exit(0); }
 
-// 3. Pay the deposit address. It must be registered on the USDC contract to receive it.
+// 3. Pay the deposit address. It must be registered on the USDC contract to receive it, and a NEAR recipient
+//    must be registered on the coin's contract (wrap.near) so the solvers can deliver to it.
 const dep = Q.depositAddress;
 if ((await balance(agent.accountId)) < BigInt(amount)) { say(`not enough ${TOKEN_LABEL} in ${agent.accountId}`); process.exit(1); }
-if (!(await view(TOKEN, "storage_balance_of", { account_id: dep }))) {
-  const bounds = await view(TOKEN, "storage_balance_bounds");
-  await agent.functionCall({ contractId: TOKEN, methodName: "storage_deposit", args: { account_id: dep, registration_only: true },
+async function register(contractId, account_id) {
+  if (await view(contractId, "storage_balance_of", { account_id })) return;
+  const bounds = await view(contractId, "storage_balance_bounds");
+  await agent.functionCall({ contractId, methodName: "storage_deposit", args: { account_id, registration_only: true },
     gas: 30n * TGAS, attachedDeposit: BigInt(bounds.min) });
 }
+await register(TOKEN, dep);
+if (DEST.chain === "NEAR") await register(DEST.asset.replace(/^nep141:/, ""), recipient);
 const out = await agent.functionCall({ contractId: TOKEN, methodName: "ft_transfer", args: { receiver_id: dep, amount: Q.amountIn },
   gas: 30n * TGAS, attachedDeposit: ONE_YOCTO });
 const tx = out.transaction.hash;
@@ -79,7 +84,7 @@ for (let i = 0; i < 40; i++) {
   if (j.status !== st) { st = j.status; say(`status: ${st}`); }
   if (["SUCCESS", "REFUNDED", "FAILED", "INCOMPLETE_DEPOSIT"].includes(st)) {
     const det = j.swapDetails || {};
-    if (st === "SUCCESS") say(`done: ${det.amountOutFormatted || Q.amountOutFormatted} ${coin} delivered to ${recipient}`);
+    if (st === "SUCCESS") say(`done: ${fmt(det.amountOutFormatted || Q.amountOutFormatted)} ${coin} delivered to ${recipient}`);
     fs.appendFileSync("trades.jsonl", JSON.stringify({ at: new Date().toISOString(), coin, usdc: Q.amountInFormatted, out: det.amountOutFormatted || Q.amountOutFormatted,
       status: st, deposit_tx: tx, deposit_address: dep, recipient }) + "\n");
     break;
