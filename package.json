@@ -1,14 +1,17 @@
 {
   "name": "mihenk-near-pay-per-call",
   "version": "0.1.0",
-  "description": "AI agents buy measured crypto-KOL data per call and pay in test USDC on NEAR testnet, using an x402-style 402 handshake.",
+  "description": "AI agents buy measured crypto-KOL data per call and pay in USDC on NEAR (testnet by default, mainnet with NEAR_ENV=mainnet), using an x402-style 402 handshake.",
   "type": "module",
   "license": "MIT",
   "scripts": {
     "setup": "node setup.mjs",
     "server": "node server.mjs",
     "agent": "node agent.mjs NEAR SOL",
-    "test": "node test.mjs"
+    "test": "node test.mjs",
+    "setup:mainnet": "NEAR_ENV=mainnet node setup.mjs",
+    "server:mainnet": "NEAR_ENV=mainnet PORT=8404 node server.mjs",
+    "agent:mainnet": "NEAR_ENV=mainnet node agent.mjs NEAR --budget 0.02 --api http://localhost:8404"
   },
   "dependencies": {
     "near-api-js": "5.1.1"

@@ -1,13 +1,13 @@
-// Pay-per-call API on NEAR testnet with an x402-style handshake:
+// Pay-per-call API on NEAR (testnet by default, NEAR_ENV=mainnet for real USDC) with an x402-style handshake:
 //   1. GET without payment     -> 402 + payment requirements (price, token, payTo, one-time nonce)
-//   2. the agent sends ft_transfer of test USDC on NEAR with memo "mihenk-x402:<nonce>"
+//   2. the agent sends ft_transfer of USDC on NEAR with memo "mihenk-x402:<nonce>"
 //   3. GET again with X-PAYMENT -> the server reads the transaction from NEAR RPC, checks it, answers 200 + X-PAYMENT-RESPONSE
 // The 402 is a 5-minute quote. A transfer that carries an issued nonce but lands after the quote expired is still
 // served at the quoted price (for up to 24 hours), so an agent that paid never ends up with nothing.
 import http from "node:http";
 import crypto from "node:crypto";
 import fs from "node:fs";
-import { config, rpc, NETWORK, priceFor, clampHours, txLink, b64, unb64, units } from "./lib.mjs";
+import { config, rpc, NETWORK, TOKEN_LABEL, priceFor, clampHours, txLink, b64, unb64, units } from "./lib.mjs";
 import { coinCalls, source } from "./data.mjs";
 
 const PORT = Number(process.env.PORT || 8403);
@@ -39,7 +39,7 @@ function requirements(resource, hours) {
   const issued = Date.now();
   nonces.set(nonce, { resource, price, issued, exp: issued + QUOTE_MS });
   saveNonces();
-  const extra = { decimals: DEC, token: "test USDC", method: "ft_transfer", memo: `mihenk-x402:${nonce}`, nonce };
+  const extra = { decimals: DEC, token: TOKEN_LABEL, method: "ft_transfer", memo: `mihenk-x402:${nonce}`, nonce };
   // Tell the agent about a cheaper, narrower request it can make instead.
   if (hours > 6) extra.cheaper_option = { hours: 6, maxAmountRequired: priceFor(6).toString() };
   return {
@@ -124,8 +124,8 @@ http.createServer(async (req, res) => {
     if (url.pathname === "/") {
       return send(res, 200, {
         name: "Mihenk AI - pay per call on NEAR",
-        description: `Measured crypto-KOL data for AI agents, paid per call in test USDC on ${NETWORK} with an x402-style 402 handshake.`,
-        endpoints: { "GET /v1/coin/{symbol}/calls?hours=24": "0.005 test USDC up to 6h, 0.01 up to 24h, 0.03 up to 7 days" },
+        description: `Measured crypto-KOL data for AI agents, paid per call in ${TOKEN_LABEL} on ${NETWORK} with an x402-style 402 handshake.`,
+        endpoints: { "GET /v1/coin/{symbol}/calls?hours=24": `0.005 ${TOKEN_LABEL} up to 6h, 0.01 up to 24h, 0.03 up to 7 days` },
         network: NETWORK, asset: cfg.token, payTo: cfg.seller, data_source: source,
       });
     }

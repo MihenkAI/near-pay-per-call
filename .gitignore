@@ -1,6 +1,9 @@
 node_modules/
 keys/
+keys-mainnet/
 data/used.json
-receipts.jsonl
-*.log
 data/nonces.json
+data/bought-*.json
+receipts.jsonl
+trades.jsonl
+*.log

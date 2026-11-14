@@ -3,15 +3,20 @@ import { connect, keyStores, KeyPair } from "near-api-js";
 import fs from "node:fs";
 import path from "node:path";
 
-export const RPC = process.env.RPC || "https://rpc.testnet.near.org";
-export const NETWORK = "near-testnet";
-export const KEYS = process.env.KEYS || "keys";
-// Test USDC on NEAR testnet (NEP-141). usdc.fakes.testnet has a public mint, so anyone can reproduce the demo.
-export const TOKEN = process.env.TOKEN || "usdc.fakes.testnet";
+// NEAR_ENV=mainnet switches everything to NEAR mainnet and real USDC; the default stays testnet with test USDC.
+export const NEAR_ENV = process.env.NEAR_ENV === "mainnet" ? "mainnet" : "testnet";
+const MAIN = NEAR_ENV === "mainnet";
+export const NETWORK = `near-${NEAR_ENV}`;
+export const RPC = process.env.RPC || (MAIN ? "https://rpc.mainnet.near.org" : "https://rpc.testnet.near.org");
+export const KEYS = process.env.KEYS || (MAIN ? "keys-mainnet" : "keys");
+// Testnet: usdc.fakes.testnet (NEP-141 with a public mint, so anyone can reproduce the demo).
+// Mainnet: Circle's native USDC on NEAR (NEP-141, 6 decimals).
+export const TOKEN = process.env.TOKEN || (MAIN ? "17208628f84f5d6ad33f0da3bbbeb27ffcb398eac501a31bd6ad2011e36133a1" : "usdc.fakes.testnet");
+export const TOKEN_LABEL = MAIN ? "USDC" : "test USDC";
 export const ONE_YOCTO = 1n; // ft_transfer requires exactly 1 yoctoNEAR attached
 export const TGAS = 1_000_000_000_000n;
 
-// Price list in token units (6 decimals): 24h of calls costs 0.01 test USDC; a narrower 6h window costs half.
+// Price list in token units (6 decimals): 24h of calls costs 0.01 USDC; a narrower 6h window costs half.
 export const PRICES = [
   { maxHours: 6, units: 5_000n },
   { maxHours: 24, units: 10_000n },
@@ -44,8 +49,8 @@ export async function account(name) {
   const k = readKey(name);
   if (!k) throw new Error(`missing ${path.join(KEYS, name + ".json")} - run "npm run setup" first`);
   const ks = new keyStores.InMemoryKeyStore();
-  await ks.setKey("testnet", k.account_id, KeyPair.fromString(k.private_key));
-  const near = await connect({ networkId: "testnet", nodeUrl: RPC, keyStore: ks, logger: false });
+  await ks.setKey(NEAR_ENV, k.account_id, KeyPair.fromString(k.private_key));
+  const near = await connect({ networkId: NEAR_ENV, nodeUrl: RPC, keyStore: ks, logger: false });
   return near.account(k.account_id);
 }
 
@@ -61,7 +66,7 @@ export const view = (contractId, methodName, args = {}) =>
     .then((r) => JSON.parse(Buffer.from(r.result).toString("utf8")));
 
 export const balance = async (accountId) => BigInt(await view(TOKEN, "ft_balance_of", { account_id: accountId }));
-export const txLink = (hash) => `https://testnet.nearblocks.io/txns/${hash}`;
+export const txLink = (hash) => `https://${MAIN ? "" : "testnet."}nearblocks.io/txns/${hash}`;
 export const units = (n, decimals = 6) => String(Number((Number(n) / 10 ** decimals).toFixed(4)));
 export const b64 = (o) => Buffer.from(JSON.stringify(o)).toString("base64");
 export const unb64 = (s) => JSON.parse(Buffer.from(s, "base64").toString("utf8"));

@@ -1,9 +1,9 @@
-// A small buyer agent with its own NEAR testnet wallet. For each coin it asks the API, reads the 402 price,
+// A small buyer agent with its own NEAR wallet (testnet by default, NEAR_ENV=mainnet for real USDC). For each coin it asks the API, reads the 402 price,
 // checks it against its budget and its list of trusted sellers, narrows the request once if the price is too high,
-// pays in test USDC (ft_transfer with the nonce as memo), retries with proof and keeps a receipt of what it bought.
+// pays in USDC (ft_transfer with the nonce as memo), retries with proof and keeps a receipt of what it bought.
 // usage: node agent.mjs NEAR [SOL ...] [--budget 0.05] [--hours 24] [--api http://localhost:8403]
 import fs from "node:fs";
-import { account, config, balance, NETWORK, TGAS, ONE_YOCTO, txLink, b64, unb64, units } from "./lib.mjs";
+import { account, config, balance, NETWORK, TOKEN_LABEL, TGAS, ONE_YOCTO, txLink, b64, unb64, units } from "./lib.mjs";
 
 const args = process.argv.slice(2);
 const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args.splice(i, 2)[1] : d; };
@@ -34,7 +34,7 @@ async function pay(req) {
   return out.transaction.hash;
 }
 
-say(`wallet ${agent.accountId} holds ${units(await balance(agent.accountId), DEC)} test USDC; budget ${units(budget, DEC)}`);
+say(`wallet ${agent.accountId} holds ${units(await balance(agent.accountId), DEC)} ${TOKEN_LABEL} on ${NETWORK}; budget ${units(budget, DEC)}`);
 
 for (const coin of coins) {
   let url = `${API}/v1/coin/${encodeURIComponent(coin)}/calls?hours=${hours}`;
@@ -66,6 +66,9 @@ for (const coin of coins) {
   const d = await response.json();
   // Check what was delivered before recording the purchase as good.
   const passed = d?.symbol === String(coin).replace(/^\$/, "").toUpperCase() && Array.isArray(d.calls) && d.summary?.calls === d.calls.length;
+  // Keep what was bought: trade.mjs acts only on data the agent paid for.
+  if (passed) { fs.mkdirSync("data", { recursive: true });
+    fs.writeFileSync(`data/bought-${d.symbol}.json`, JSON.stringify({ ...d, bought_at: new Date().toISOString(), network: NETWORK, tx: req?.tx || null })); }
   fs.appendFileSync("receipts.jsonl", JSON.stringify({ at: new Date().toISOString(), bought: `${d.symbol} calls, last ${d.hours}h`,
     from: req?.payTo, price: req ? units(req.price, DEC) : "0", token: req?.asset, tx: req?.tx, check: passed ? "passed" : "failed" }) + "\n");
   const s = d.summary;
@@ -76,4 +79,4 @@ for (const coin of coins) {
     say(`  @${x.kol} (${x.followers.toLocaleString("en-US")} followers) ${x.direction} at ${x.posted_at} -> ${mv ? `${mv} (${x.price_source || "price feed n/a"})` : "not measured yet"}`);
   }
 }
-say(`done; remaining budget ${units(budget, DEC)} test USDC, wallet ${units(await balance(agent.accountId), DEC)}; receipts in receipts.jsonl`);
+say(`done; remaining budget ${units(budget, DEC)} ${TOKEN_LABEL}, wallet ${units(await balance(agent.accountId), DEC)}; receipts in receipts.jsonl`);
