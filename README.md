@@ -221,7 +221,7 @@ Recorded on 14 November 2026, 21:13–21:15 UTC, on NEAR mainnet, using the data
 [trade 21:15:26] agent wallet now holds 2.433 USDC
 ```
 
-About 50 seconds from the deposit to delivery; the NEAR arrived in the agent's own account from `intents.near`.
+The NEAR arrived in the agent's own account from `intents.near` 39 seconds after the deposit (block times 21:14:33 and 21:15:12 UTC; [delivery](https://nearblocks.io/txns/GsihQuwGMqHpVerR9J52ycG5GPuSgXQsqRm1FSznudL3)); the 1Click status API reported `SUCCESS` at the agent's next check.
 
 This shows an agent acting on measured data inside hard limits; it is not a trading strategy.
 
